@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Royal Palace Resort - Seamless FPV Drone Virtual Tour</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #070504;
+      color: #f7f4ee;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 1000vh SCROLL TRACK FOR BUTTERY INERTIAL SCRUBBING */
+    .scroll-container {
+      width: 100%;
+      height: 1000vh;
+      position: relative;
+      pointer-events: none;
+    }
+
+    /* FIXED CINEMATIC VIEWPORT */
+    .viewport-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: #070504;
+    }
+
+    /* MASTER HARDWARE-ACCELERATED RETINA CANVAS */
+    #drone-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      will-change: transform;
+    }
+
+    /* LUXURY PASTEL CINEMATIC VIGNETTE */
+    .cinema-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 12;
+      background: radial-gradient(circle at 50% 50%, transparent 68%, rgba(7, 5, 4, 0.45) 100%);
+    }
+
+    /* SUBTLE PROGRESS BAR */
+    .tour-progress-track {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 245, 235, 0.08);
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .tour-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #d8baa1 0%, #f4e8db 50%, #e2c2a9 100%);
+      box-shadow: 0 0 10px rgba(230, 200, 175, 0.7);
+      will-change: width;
+    }
+
+    /* SCROLL HINT (Disappears on first interaction) */
+    .scroll-hint {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, rgba(245, 235, 220, 0.85), transparent);
+      animation: scroll-bob 2.2s infinite ease-in-out;
+    }
+
+    @keyframes scroll-bob {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      50.1% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1000vh SCROLL CONTAINER -->
+  <div class="scroll-container" id="scroll-container"></div>
+
+  <!-- FIXED STAGE -->
+  <main class="viewport-stage" id="viewport-stage">
+    <!-- MASTER DRONE CANVAS -->
+    <canvas id="drone-canvas"></canvas>
+
+    <!-- CINEMA VIGNETTE -->
+    <div class="cinema-vignette"></div>
+
+    <!-- SCROLL HINT -->
+    <div class="scroll-hint" id="scroll-hint">
+      <div class="scroll-hint-line"></div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="tour-progress-track">
+      <div class="tour-progress-fill" id="tour-progress-fill"></div>
+    </div>
+  </main>
+
+  <!-- DEEP SCROLLYTELLING ENGINE -->
+  <script src="js/scrolly_player.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      ScrollyPlayer.mount('#drone-canvas', {
+        totalFrames: 600,
+        frameUrl: (idx) => `frames_webp/frame_${String(idx).padStart(4, '0')}.webp?v=6`,
+        scrollContainer: '#scroll-container',
+        progressTrack: '#tour-progress-fill',
+        scrollHint: '#scroll-hint',
+        lerpDamping: 0.088
+      });
+    });
+  </script>
+</body>
+</html>
