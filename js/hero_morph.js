@@ -58,15 +58,16 @@
 
       // 1. Initial State (Center of Sky in Page 1)
       const isMobile = vw < 768;
-      const startW = Math.min(isMobile ? 320 : 430, vw * 0.78);
+      const startW = Math.min(isMobile ? 290 : 380, vw * 0.72);
       const startH = startW / this.aspectRatio;
       const startX = (vw - startW) * 0.5;
-      const startY = Math.max(60, vh * 0.35 - startH * 0.5);
+      const startY = Math.max(40, vh * 0.28 - startH * 0.5);
 
       // 2. Target Docked State (Inside Navbar Slot in Page 2)
       const slotRect = this.navSlotEl.getBoundingClientRect();
-      const targetW = slotRect.width > 0 ? slotRect.width : (isMobile ? 120 : 160);
-      const targetH = targetW / this.aspectRatio;
+      // Reduced, elegant logo size for navbar: height 36px on desktop / 28px on mobile
+      const targetH = isMobile ? 28 : 36;
+      const targetW = targetH * this.aspectRatio;
       const targetX = slotRect.left > 0 ? slotRect.left : (isMobile ? 16 : 36);
       const targetY = slotRect.top + (slotRect.height - targetH) * 0.5;
 

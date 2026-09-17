@@ -132,23 +132,22 @@
     }
 
     .navbar-pill {
-      width: 100%;
-      max-width: 1380px;
-      height: 72px;
+      width: 92vw;
+      max-width: 1720px;
+      height: 64px;
       background: #e0ceca;
-      box-shadow: 0 10px 32px rgba(18, 12, 8, 0.28);
-      border-radius: 0 0 22px 22px;
-      padding: 0 36px;
+      box-shadow: 0 10px 32px rgba(18, 12, 8, 0.24);
+      border-radius: 0 0 20px 20px;
+      padding: 0 clamp(20px, 3vw, 44px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       pointer-events: auto;
-      margin: 0 16px;
     }
 
     .nav-brand-slot {
-      width: 175px;
-      height: 52px;
+      width: 70px;
+      height: 40px;
       position: relative;
       flex-shrink: 0;
     }
@@ -216,23 +215,23 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
+      filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.35));
     }
 
     .hero-tagline {
       position: fixed;
       left: 50%;
-      top: calc(35% + 140px);
+      top: 50.5%;
       transform: translate3d(-50%, 0, 0);
       text-align: center;
       pointer-events: none;
       z-index: 110;
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-size: clamp(1.2rem, 2.4vw, 1.85rem);
-      letter-spacing: 0.04em;
-      color: #f7eedf;
-      text-shadow: 0 2px 14px rgba(7, 5, 4, 0.75), 0 0 2px rgba(0,0,0,0.9);
+      font-size: clamp(1.2rem, 2.3vw, 1.85rem);
+      letter-spacing: 0.05em;
+      color: #1a1411; /* Shades of rich heritage black */
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.38), 0 0 1px rgba(0, 0, 0, 0.15);
       width: 90%;
       max-width: 900px;
       will-change: opacity, transform;
@@ -241,24 +240,24 @@
 
     @media (max-width: 992px) {
       .navbar-pill {
+        width: 94vw;
         padding: 0 20px;
-        height: 64px;
-        margin: 0 8px;
+        height: 60px;
         border-radius: 0 0 16px 16px;
       }
       .nav-links-group {
-        gap: 20px;
+        gap: 18px;
       }
       .nav-link-item {
         font-size: 11px;
         letter-spacing: 0.09em;
       }
       .nav-brand-slot {
-        width: 130px;
-        height: 42px;
+        width: 55px;
+        height: 34px;
       }
       .hero-tagline {
-        top: calc(35% + 115px);
+        top: 49%;
         font-size: 1.15rem;
       }
     }
@@ -268,11 +267,16 @@
         display: none;
       }
       .navbar-pill {
+        width: 95vw;
         padding: 0 16px;
-        height: 58px;
+        height: 54px;
+      }
+      .nav-brand-slot {
+        width: 48px;
+        height: 30px;
       }
       .hero-tagline {
-        top: calc(35% + 95px);
+        top: 48%;
         font-size: 1.05rem;
       }
     }
