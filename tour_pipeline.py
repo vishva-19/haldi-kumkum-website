@@ -38,7 +38,8 @@ class AssetCatalog:
         self.height = height
 
         # Load raw assets
-        self.img_facade = self._load_img("facade_complete.jpg")
+        self.img_main1 = self._load_img("main1.jpg")
+        self.img_main2 = self._load_img("main2.jpg")
         self.img_door_l = self._load_img("door_left.png")
         self.img_door_r = self._load_img("door_right.png")
         self.img_curt_l = self._load_or_create_curtain("left")
@@ -53,17 +54,16 @@ class AssetCatalog:
         self.pano_h, self.pano_w = self.pano.shape[:2]
 
         # Calculate entrance door landmarks on panorama
-        raw_w = self.img_facade.shape[1]
-        self.door_x1 = int(631 * self.width / raw_w)
-        self.door_x2 = int(749 * self.width / raw_w)
-        self.door_y1 = int(702 * self.width / raw_w)
-        self.door_y2 = int(849 * self.width / raw_w)
+        self.door_x1 = int(648 * 1920 / 1376)
+        self.door_x2 = int(728 * 1920 / 1376)
+        self.door_y1 = int(806 * 1920 / 1376)
+        self.door_y2 = int(892 * 1920 / 1376)
 
         # Calculate right picture-window landmarks on panorama
-        self.win_x1 = int(770 * self.width / raw_w)
-        self.win_x2 = int(840 * self.width / raw_w)
-        self.win_y1 = int(702 * self.width / raw_w)
-        self.win_y2 = int(849 * self.width / raw_w)
+        self.win_x1 = int(770 * 1920 / 1376)
+        self.win_x2 = int(840 * 1920 / 1376)
+        self.win_y1 = int(792 * 1920 / 1376)
+        self.win_y2 = int(892 * 1920 / 1376)
 
         # Pre-scale interior assets for aspect cover
         self.asset_banq1 = self._make_cover_asset(self.img_banq1)
@@ -102,12 +102,32 @@ class AssetCatalog:
         return curt
 
     def _build_master_facade(self) -> np.ndarray:
-        raw_h, raw_w = self.img_facade.shape[:2]
-        target_w = self.width
-        target_h = int(raw_h * target_w / raw_w)
-        return cv2.resize(
-            self.img_facade, (target_w, target_h), interpolation=cv2.INTER_LANCZOS4
+        w_raw = self.img_main1.shape[1]
+        m2 = (
+            cv2.resize(self.img_main2, (w_raw, self.img_main2.shape[0]))
+            if self.img_main2.shape[1] != w_raw
+            else self.img_main2
         )
+        m1_h = self.img_main1.shape[0]
+        m2_h = m2.shape[0]
+        overlap_h = 456
+        total_h = m1_h + m2_h - overlap_h
+
+        pano_raw = np.zeros((total_h, w_raw, 3), dtype=np.uint8)
+        pano_raw[0 : m1_h - overlap_h, :] = self.img_main1[0 : m1_h - overlap_h, :]
+
+        alpha = np.linspace(0, 1, overlap_h)[:, None, None].astype(np.float32)
+        pano_raw[m1_h - overlap_h : m1_h, :] = (
+            self.img_main1[m1_h - overlap_h : m1_h, :].astype(np.float32) * (1.0 - alpha)
+            + m2[0:overlap_h, :].astype(np.float32) * alpha
+        ).astype(np.uint8)
+
+        pano_raw[m1_h:total_h, :] = m2[overlap_h:, :]
+
+        pano = cv2.resize(
+            pano_raw, (1920, int(total_h * 1920 / w_raw)), interpolation=cv2.INTER_LANCZOS4
+        )
+        return pano
 
     def _make_cover_asset(self, raw_img: np.ndarray) -> np.ndarray:
         rh, rw = raw_img.shape[:2]
