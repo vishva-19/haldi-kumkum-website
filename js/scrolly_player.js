@@ -272,6 +272,7 @@
         autoFlightSpeed: options.autoFlightSpeed || 0.0016
       });
 
+      this.onProgress = options.onProgress || null;
       this._lastRenderedIdx = -1;
       this._animFrameId = null;
       this._resizeHandler = this._onResize.bind(this);
@@ -318,6 +319,9 @@
 
     _loop() {
       const progress = this.inertia.tick();
+      if (this.onProgress) {
+        this.onProgress(progress);
+      }
       const targetIdx = Math.min(this.totalFrames - 1, Math.floor(progress * this.totalFrames));
 
       if (targetIdx !== this._lastRenderedIdx) {

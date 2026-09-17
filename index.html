@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>The Royal Palace Resort - Seamless FPV Drone Virtual Tour</title>
+  <title>Haldi Kumkum Resort - A Sanctuary of Heritage and Warmth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -18,7 +21,7 @@
       height: 100%;
       background-color: #070504;
       color: #f7f4ee;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow-x: hidden;
       overscroll-behavior: none;
       user-select: none;
@@ -60,7 +63,7 @@
       inset: 0;
       pointer-events: none;
       z-index: 12;
-      background: radial-gradient(circle at 50% 50%, transparent 68%, rgba(7, 5, 4, 0.45) 100%);
+      background: radial-gradient(circle at 50% 50%, transparent 68%, rgba(7, 5, 4, 0.42) 100%);
     }
 
     /* SUBTLE PROGRESS BAR */
@@ -111,6 +114,168 @@
       50.1% { transform: scaleY(1); transform-origin: bottom; }
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
+
+    /* ==========================================================================
+       TICKET 2: LUXURY FLOATING NAVIGATION BAR (PAGE 2)
+       ========================================================================== */
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      transition: opacity 0.2s ease-out;
+      opacity: 0;
+    }
+
+    .navbar-pill {
+      width: 100%;
+      max-width: 1380px;
+      height: 72px;
+      background: #e0ceca;
+      box-shadow: 0 10px 32px rgba(18, 12, 8, 0.28);
+      border-radius: 0 0 22px 22px;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: auto;
+      margin: 0 16px;
+    }
+
+    .nav-brand-slot {
+      width: 175px;
+      height: 52px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-link-item {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #2b221d;
+      text-decoration: none;
+      transition: color 0.25s ease, transform 0.25s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-link-item:hover {
+      color: #8c674e;
+      transform: translateY(-1px);
+    }
+
+    .nav-link-item.active {
+      font-weight: 800;
+      color: #120c08;
+    }
+
+    .nav-menu-btn {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #120c08;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-menu-btn:hover {
+      background: rgba(18, 12, 8, 0.07);
+    }
+
+    /* ==========================================================================
+       TICKET 1 & 3: HERO BRANDING OVERLAY & MORPHING LOGO
+       ========================================================================== */
+    .morph-logo-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 120;
+      pointer-events: none;
+      will-change: transform, width, height;
+      transform-origin: top left;
+    }
+
+    .morph-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
+    }
+
+    .hero-tagline {
+      position: fixed;
+      left: 50%;
+      top: calc(35% + 140px);
+      transform: translate3d(-50%, 0, 0);
+      text-align: center;
+      pointer-events: none;
+      z-index: 110;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.4vw, 1.85rem);
+      letter-spacing: 0.04em;
+      color: #f7eedf;
+      text-shadow: 0 2px 14px rgba(7, 5, 4, 0.75), 0 0 2px rgba(0,0,0,0.9);
+      width: 90%;
+      max-width: 900px;
+      will-change: opacity, transform;
+      transition: opacity 0.15s ease-out;
+    }
+
+    @media (max-width: 992px) {
+      .navbar-pill {
+        padding: 0 20px;
+        height: 64px;
+        margin: 0 8px;
+        border-radius: 0 0 16px 16px;
+      }
+      .nav-links-group {
+        gap: 20px;
+      }
+      .nav-link-item {
+        font-size: 11px;
+        letter-spacing: 0.09em;
+      }
+      .nav-brand-slot {
+        width: 130px;
+        height: 42px;
+      }
+      .hero-tagline {
+        top: calc(35% + 115px);
+        font-size: 1.15rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links-group {
+        display: none;
+      }
+      .navbar-pill {
+        padding: 0 16px;
+        height: 58px;
+      }
+      .hero-tagline {
+        top: calc(35% + 95px);
+        font-size: 1.05rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -118,13 +283,38 @@
   <!-- 1000vh SCROLL CONTAINER -->
   <div class="scroll-container" id="scroll-container"></div>
 
-  <!-- FIXED STAGE -->
+  <!-- FIXED CINEMATIC VIEWPORT STAGE -->
   <main class="viewport-stage" id="viewport-stage">
     <!-- MASTER DRONE CANVAS -->
     <canvas id="drone-canvas"></canvas>
 
     <!-- CINEMA VIGNETTE -->
     <div class="cinema-vignette"></div>
+
+    <!-- TICKET 2: LUXURY FLOATING NAVIGATION BAR -->
+    <header class="navbar-wrapper" id="navbar-wrapper">
+      <nav class="navbar-pill" id="navbar-pill">
+        <div class="nav-brand-slot" id="nav-brand-slot"></div>
+        <ul class="nav-links-group" id="nav-links-group">
+          <li><a class="nav-link-item active" href="#home">HOME</a></li>
+          <li><a class="nav-link-item" href="#story">OUR STORY</a></li>
+          <li><a class="nav-link-item" href="#accommodation">ACCOMMODATION</a></li>
+          <li><a class="nav-link-item" href="#amenities">AMENITIES</a></li>
+          <li><a class="nav-link-item" href="#wedding">ROYAL WEDDING</a></li>
+        </ul>
+        <div class="nav-menu-btn" id="nav-menu-btn">MENU</div>
+      </nav>
+    </header>
+
+    <!-- TICKET 1 & 3: MORPHING BRAND LOGO -->
+    <div class="morph-logo-container" id="morph-logo-container">
+      <img src="img/logo_official.png" alt="Haldi Kumkum Resort" class="morph-logo-img" id="morph-logo-img">
+    </div>
+
+    <!-- TICKET 1: LUXURY HERO TAGLINE -->
+    <div class="hero-tagline" id="hero-tagline">
+      A Sanctuary of Heritage and Warmth
+    </div>
 
     <!-- SCROLL HINT -->
     <div class="scroll-hint" id="scroll-hint">
@@ -137,17 +327,31 @@
     </div>
   </main>
 
-  <!-- DEEP SCROLLYTELLING ENGINE -->
+  <!-- DEEP SCROLLYTELLING ENGINE & HERO MORPH CONTROLLER -->
   <script src="js/scrolly_player.js"></script>
+  <script src="js/hero_morph.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mount Hero Morph Controller
+      const morph = HeroMorphController.mount({
+        logo: '#morph-logo-container',
+        tagline: '#hero-tagline',
+        navbar: '#navbar-wrapper',
+        navSlot: '#nav-brand-slot',
+        transitionEnd: 0.14
+      });
+
+      // 2. Mount Scrollytelling Player with frame-accurate progress hook
       ScrollyPlayer.mount('#drone-canvas', {
         totalFrames: 600,
         frameUrl: (idx) => `frames_webp/frame_${String(idx).padStart(4, '0')}.webp?v=6`,
         scrollContainer: '#scroll-container',
         progressTrack: '#tour-progress-fill',
         scrollHint: '#scroll-hint',
-        lerpDamping: 0.088
+        lerpDamping: 0.088,
+        onProgress: (progress) => {
+          morph.update(progress);
+        }
       });
     });
   </script>
