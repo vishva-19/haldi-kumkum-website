@@ -65,8 +65,8 @@
 
       // 2. Target Docked State (Inside Navbar Slot in Page 2)
       const slotRect = this.navSlotEl.getBoundingClientRect();
-      // Reduced, elegant logo size for navbar: height 36px on desktop / 28px on mobile
-      const targetH = isMobile ? 28 : 36;
+      // Visible, beautifully proportioned logo size for navbar: height 48px on desktop / 36px on mobile
+      const targetH = isMobile ? 36 : 48;
       const targetW = targetH * this.aspectRatio;
       const targetX = slotRect.left > 0 ? slotRect.left : (isMobile ? 16 : 36);
       const targetY = slotRect.top + (slotRect.height - targetH) * 0.5;
