@@ -17,6 +17,3 @@ __pycache__/
 .venv/
 venv/
 env/
-
-# Media artifacts
-*.mp4

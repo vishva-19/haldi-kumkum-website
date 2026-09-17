@@ -162,8 +162,8 @@ class CameraEngine:
         cy = max(half_vh, min(sh - half_vh, center_y))
 
         m = cv2.getRotationMatrix2D((cx, cy), roll_deg, zoom)
-        m[0, 2] += (out_w / 2.0) - cx
-        m[1, 2] += (out_h / 2.0) - cy
+        m[0, 2] += (out_w / 2.0) - cx * zoom
+        m[1, 2] += (out_h / 2.0) - cy * zoom
 
         return cv2.warpAffine(
             src,
@@ -263,9 +263,9 @@ class TourPipeline:
         if f <= 140:
             t = f / 140.0
             st = self.cam.smoothstep(t)
-            cy = 540.0 + st * 195.0
+            cy = 540.0 + st * 420.0
             cx = self.catalog.pano_w / 2.0
-            zoom = 1.0 + st * 0.16
+            zoom = 1.0 + st * 0.25
             roll = math.sin(t * math.pi * 2.0) * 0.4
 
             frame_src = self.cam.render_doors_and_curtains(
@@ -286,8 +286,8 @@ class TourPipeline:
             win_cy = (self.catalog.win_y1 + self.catalog.win_y2) / 2.0
 
             cx = (self.catalog.pano_w / 2.0) * (1.0 - st) + win_cx * st
-            cy = 735.0 * (1.0 - st) + win_cy * st
-            zoom = 1.16 + st * 2.29
+            cy = 960.0 * (1.0 - st) + win_cy * st
+            zoom = 1.25 + st * 2.2
             roll = math.sin(t * math.pi) * 0.6
 
             frame_src = self.cam.render_doors_and_curtains(
